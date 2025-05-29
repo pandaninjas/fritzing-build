@@ -24,5 +24,5 @@ jobs:
         run: cd libgit2 && mkdir build && cd build && cmake .. && cmake --build .
         shell: cmd
       - name: Do stuff
-        run: mkdir build && cd build && qmake ..\phoenix.pro && make
+        run: cd fritzing-app && mkdir build && cd build && qmake ..\phoenix.pro && make
         shell: cmd
