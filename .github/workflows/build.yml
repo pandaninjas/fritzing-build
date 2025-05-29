@@ -1,0 +1,24 @@
+on:
+  push:
+    branches:
+    - main
+    - release/*
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    permissions: write-all
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Repository name with owner. For example, actions/checkout
+          # Default: ${{ github.repository }}
+          repository: 'fritzing/fritzing-app'
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+      - name: Do stuff
+        run: mkdir build && cd build && qmake ..\phoenix.pro && make
