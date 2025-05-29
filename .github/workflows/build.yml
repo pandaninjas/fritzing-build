@@ -23,6 +23,9 @@ jobs:
       - name: Build libgit2
         run: cd libgit2 && mkdir build64 && cd build64 && cmake -DCMAKE_BUILD_TYPE=Release .. && cmake --build . && xcopy /E /I .\Debug .\Release
         shell: cmd
+      - name: Install Boost
+        run: curl https://archives.boost.io/release/1.85.0/source/boost_1_85_0.zip -L > boost_1_85_0.zip && tar xf boost_1_85_0.zip
+        shell: cmd
       - name: Do stuff
         run: cd fritzing-app && mkdir build && cd build && qmake ..\phoenix.pro && make
         shell: cmd
