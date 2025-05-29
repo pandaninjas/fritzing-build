@@ -21,7 +21,7 @@ jobs:
         run: git clone https://github.com/libgit2/libgit2
       - uses: ilammy/msvc-dev-cmd@v1
       - name: Build libgit2
-        run: cd libgit2 && mkdir build && cd build && cmake .. && cmake --build .
+        run: cd libgit2 && mkdir build64 && cd build64 && cmake .. && cmake --build .
         shell: cmd
       - name: Do stuff
         run: cd fritzing-app && mkdir build && cd build && qmake ..\phoenix.pro && make
