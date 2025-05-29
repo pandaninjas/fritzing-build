@@ -20,6 +20,7 @@ jobs:
           repository: 'fritzing/fritzing-app'
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
+      - uses: ilammy/msvc-dev-cmd@v1
       - name: Do stuff
         run: mkdir build && cd build && qmake ..\phoenix.pro && make
         shell: cmd
