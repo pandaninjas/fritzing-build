@@ -22,3 +22,4 @@ jobs:
         uses: jurplel/install-qt-action@v4
       - name: Do stuff
         run: mkdir build && cd build && qmake ..\phoenix.pro && make
+        shell: cmd
