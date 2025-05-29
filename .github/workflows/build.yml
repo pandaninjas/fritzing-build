@@ -26,8 +26,11 @@ jobs:
       - name: Install Boost
         run: curl https://archives.boost.io/release/1.85.0/source/boost_1_85_0.zip -L > boost_1_85_0.zip && tar xf boost_1_85_0.zip
         shell: cmd
-      - name: Install ngspice
-        run: curl https://sourceforge.net/projects/ngspice/files/ng-spice-rework/44/ngspice-44.tar.gz/download > ngspice-44.tar.gz && tar xf ngspice-44.tar.gz
+      - name: Download ngspice
+        run: curl https://sourceforge.net/projects/ngspice/files/ng-spice-rework/44/ngspice-44.tar.gz/download > ngspice-44.tar.gz && tar xzf ngspice-44.tar.gz
+      - name: Build ngspice
+        run: cd ngspice-44 && ./compile_min.sh
+        shell: bash
       - name: Do stuff
         run: cd fritzing-app && mkdir build && cd build && qmake ..\phoenix.pro && make
         shell: cmd
