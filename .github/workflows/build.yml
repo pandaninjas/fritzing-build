@@ -23,7 +23,7 @@ jobs:
         run: git clone https://github.com/libgit2/libgit2
       - uses: ilammy/msvc-dev-cmd@v1
       - name: Build libgit2
-        run: cd libgit2 && mkdir build64 && cd build64 && cmake -DCMAKE_BUILD_TYPE=Release .. && cmake --build . && xcopy /E /I .\Debug .\Release
+        run: cd libgit2 && mkdir build64 && cd build64 && cmake -DCMAKE_C_COMPILER_LAUNCHER=sccache -DCMAKE_CXX_COMPILER_LAUNCHER=sccache -DCMAKE_BUILD_TYPE=Release .. && cmake --build . && xcopy /E /I .\Debug .\Release
         shell: cmd
       - name: Install Boost
         run: curl https://archives.boost.io/release/1.85.0/source/boost_1_85_0.zip -L > boost_1_85_0.zip && tar xf boost_1_85_0.zip
