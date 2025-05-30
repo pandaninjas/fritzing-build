@@ -19,6 +19,9 @@ jobs:
           version: "6.5.*"
       - name: Setup msys2
         uses: msys2/setup-msys2@v2
+      - name: Install packages in msys2
+        run: pacman -S base-devel
+        shell: msys2 {0}
       - name: Checkout fritzing
         run: git clone https://github.com/fritzing/fritzing-app
       - name: Checkout libgit2
