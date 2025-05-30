@@ -17,6 +17,7 @@ jobs:
         uses: jurplel/install-qt-action@v4
         with:
           version: "6.5.*"
+          modules: qtserialport
       - name: Setup msys2
         uses: msys2/setup-msys2@v2
       - name: Install packages in msys2
