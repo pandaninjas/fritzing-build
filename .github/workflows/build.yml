@@ -11,9 +11,6 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - name: Test
-        run: where tar
-        shell: cmd
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
@@ -30,7 +27,7 @@ jobs:
         run: curl https://archives.boost.io/release/1.85.0/source/boost_1_85_0.zip -L > boost_1_85_0.zip && tar xf boost_1_85_0.zip
         shell: cmd
       - name: Download ngspice
-        run: curl https://sourceforge.net/projects/ngspice/files/ng-spice-rework/44/ngspice-44.tar.gz/download > ngspice-44.tar.gz && tar xzf ngspice-44.tar.gz
+        run: curl https://sourceforge.net/projects/ngspice/files/ng-spice-rework/44/ngspice-44.tar.gz/download > ngspice-44.tar.gz && "C:\Program Files\Git\usr\bin\tar.exe" xzf ngspice-44.tar.gz
       - name: Build ngspice
         run: cd ngspice-44 && ./compile_min.sh
         shell: bash
