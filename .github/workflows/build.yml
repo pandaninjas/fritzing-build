@@ -45,7 +45,7 @@ jobs:
         run: export PATH=$PATH:/ucrt64/bin && cd ngspice-44 && ./autogen.sh && mkdir release && cd release  && ../configure --with-ngshared --enable-cider --enable-relpath --disable-debug prefix="D:/a/fritzing-build/fritzing-build/ngspice-42" CFLAGS="-m64 -O2" LDFLAGS="-m64 -s" && make clean -j$(nproc) && make -j$(nproc) && make install 
         shell: msys2 {0}
       - name: Build INTUISPHERE QuaZip
-        run: git clone https://github.com/INTUISPHERE/quazip_qt6 quazip-6.5.3-1.4intuisphere && cd quazip-6.5.3-1.4intuisphere && cmake --preset vcpkg && cmake -B build && cmake --build build --config Release
+        run: git clone https://github.com/INTUISPHERE/quazip_qt6 quazip-6.5.3-1.4intuisphere && cd quazip-6.5.3-1.4intuisphere && cmake --preset vcpkg && cmake -B build && cmake --build build --config Release && tree
         shell: cmd
       - name: Do stuff
         run: cd fritzing-app && mkdir build && cd build && qmake -tp vc ..\phoenix.pro && msbuild Fritzing.vcxproj && tree
