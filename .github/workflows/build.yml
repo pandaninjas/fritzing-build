@@ -11,6 +11,8 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
+      - name: Run sccache-cache
+        uses: mozilla-actions/sccache-action@v0.0.9
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
@@ -28,6 +30,7 @@ jobs:
         shell: cmd
       - name: Download ngspice
         run: curl https://sourceforge.net/projects/ngspice/files/ng-spice-rework/44/ngspice-44.tar.gz/download > ngspice-44.tar.gz && "C:\Program Files\Git\usr\bin\tar.exe" xzf ngspice-44.tar.gz
+        shell: cmd
       - name: Build ngspice
         run: cd ngspice-44 && ./compile_min.sh
         shell: bash
