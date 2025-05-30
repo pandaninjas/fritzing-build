@@ -20,7 +20,7 @@ jobs:
       - name: Setup msys2
         uses: msys2/setup-msys2@v2
       - name: Install packages in msys2
-        run: pacman -S --noconfirm base-devel autotools libtool automake automake1.17
+        run: pacman -S --noconfirm base-devel autotools libtool automake automake1.17 mingw-w64-ucrt-x86_64-gcc
         shell: msys2 {0}
       - name: Checkout fritzing
         run: git clone https://github.com/fritzing/fritzing-app
