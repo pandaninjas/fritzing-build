@@ -44,5 +44,5 @@ jobs:
         run: git clone https://github.com/INTUISPHERE/quazip_qt6 quazip-6.5.3-1.4intuisphere && cd quazip-6.5.3-1.4intuisphere && cmake --preset vcpkg && cmake -B build && cmake --build build --config Release
         shell: cmd
       - name: Do stuff
-        run: cd fritzing-app && mkdir build && cd build && qmake ..\phoenix.pro && make
+        run: cd fritzing-app && mkdir build && cd build && qmake -tp vc ..\phoenix.pro && dir
         shell: cmd
