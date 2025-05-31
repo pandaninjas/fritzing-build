@@ -11,18 +11,18 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - name: Tailscale
-        uses: tailscale/github-action@v3
-        with:
-          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
-          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
-          tags: tag:ci
-      - name: Setup upterm session
-        run: | 
-          Get-WindowsCapability -Online -Name open* | Add-WindowsCapability -Online
-          Start-Service sshd
-      - name: Add public key to service
-        run: powershell New-Item -Force -ItemType Directory -Path $env:ProgramData\ssh; powershell Add-Content -Force -Path $env:ProgramData\ssh\administrators_authorized_keys -Value '''${{ secrets.SSH_PUBKEY }}''';icacls.exe ""$env:ProgramData\ssh\administrators_authorized_keys"" /inheritance:r /grant ""Administrators:F"" /grant ""SYSTEM:F""
+      # - name: Tailscale
+      #   uses: tailscale/github-action@v3
+      #   with:
+      #     oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+      #     oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+      #     tags: tag:ci
+      # - name: Setup upterm session
+      #   run: | 
+      #     Get-WindowsCapability -Online -Name open* | Add-WindowsCapability -Online
+      #     Start-Service sshd
+      # - name: Add public key to service
+      #   run: powershell New-Item -Force -ItemType Directory -Path $env:ProgramData\ssh; powershell Add-Content -Force -Path $env:ProgramData\ssh\administrators_authorized_keys -Value '''${{ secrets.SSH_PUBKEY }}''';icacls.exe ""$env:ProgramData\ssh\administrators_authorized_keys"" /inheritance:r /grant ""Administrators:F"" /grant ""SYSTEM:F""
       - name: Run sccache-cache
         uses: mozilla-actions/sccache-action@v0.0.9
       - name: Install Qt
