@@ -18,7 +18,9 @@ jobs:
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
       - name: Setup upterm session
-        run: Start-Service sshd
+        run: | 
+          Get-WindowsCapability -Online -Name open* | Add-WindowsCapability -Online
+          Start-Service sshd
       - name: Add public key to service
         run: powershell New-Item -Force -ItemType Directory -Path $env:USERPROFILE\.ssh; Add-Content -Force -Path $env:USERPROFILE\.ssh\authorized_keys -Value '${{ secrets.SSH_PUBKEY }}'
       - name: Run sccache-cache
