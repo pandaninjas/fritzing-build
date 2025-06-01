@@ -70,5 +70,4 @@ jobs:
         with:
           name: fritzing-build-debug-dir
           path: |
-            .\fritzing-app\build\debug
-            .\fritzing-app\build\release
+            .\fritzing-app\debug64
