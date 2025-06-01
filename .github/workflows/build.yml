@@ -62,7 +62,7 @@ jobs:
         run: git clone https://github.com/INTUISPHERE/quazip_qt6 && cd quazip_qt6 && cmake --preset vcpkg && cmake -B build && cmake --build build --config Release && cd .. && mkdir quazip-6.5.3-1.4intuisphere && mkdir quazip-6.5.3-1.4intuisphere\include && mkdir quazip-6.5.3-1.4intuisphere\include\QuaZip-Qt6-1.4\quazip && xcopy /E /I .\quazip_qt6\quazip quazip-6.5.3-1.4intuisphere\include\QuaZip-Qt6-1.4\quazip && mkdir quazip-6.5.3-1.4intuisphere\lib && xcopy /E /I .\quazip_qt6\build\quazip\Release quazip-6.5.3-1.4intuisphere\lib
         shell: cmd
       - name: Do stuff
-        run: cd fritzing-app && mkdir build && cd build && qmake -tp vc ..\phoenix.pro && msbuild Fritzing.vcxproj && %QT_ROOT_DIR%\bin\windeployqt ..\debug64 && copy D:\a\fritzing-build\fritzing-build\quazip_qt6\build\quazip\Release\quazip1-qt6.dll ..\debug64 && copy D:\a\fritzing-build\fritzing-build\libgit2\build64\Debug\git2.dll ..\debug64
+        run: cd fritzing-app && mkdir build && cd build && qmake -tp vc ..\phoenix.pro && msbuild Fritzing.vcxproj && %QT_ROOT_DIR%\bin\windeployqt ..\debug64\Fritzing.exe && copy D:\a\fritzing-build\fritzing-build\quazip_qt6\build\quazip\Release\*.dll ..\debug64 && %QT_ROOT_DIR%\bin\windeployqt ..\debug64\quazip1-qt6.dll && copy D:\a\fritzing-build\fritzing-build\libgit2\build64\Debug\git2.dll ..\debug64
         shell: cmd
       - name: Upload result
         uses: actions/upload-artifact@v4
