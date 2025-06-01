@@ -58,7 +58,7 @@ jobs:
         run: curl -L https://sourceforge.net/projects/ngspice/files/ng-spice-rework/44/ngspice-44.tar.gz/download > ngspice-44.tar.gz && "C:\Program Files\Git\usr\bin\tar.exe" xzf ngspice-44.tar.gz
         shell: cmd
       - name: Build ngspice
-        run: export PATH=$PATH:/ucrt64/bin && cd ngspice-44 && ./autogen.sh && mkdir release && cd release  && ../configure --with-ngshared --enable-cider --enable-relpath --disable-debug prefix="D:/a/fritzing-build/fritzing-build/ngspice-42" CC="sccache gcc" CXX="sccache g++" CFLAGS="-m64 -O2" LDFLAGS="-m64 -s" && make clean -j$(nproc) && make -j$(nproc) && make install 
+        run: export PATH=$PATH:/ucrt64/bin && cd ngspice-44 && ./autogen.sh && mkdir release && cd release  && ../configure --with-ngshared --enable-cider --enable-relpath --disable-debug prefix="D:/a/fritzing-build/fritzing-build/ngspice-42" CFLAGS="-m64 -O2" LDFLAGS="-m64 -s" && make clean -j$(nproc) && make -j$(nproc) && make install 
         shell: msys2 {0}
       - name: Build INTUISPHERE QuaZip
         run: git clone https://github.com/INTUISPHERE/quazip_qt6 && cd quazip_qt6 && cmake --preset vcpkg && cmake -B build && cmake --build build --config Release && cd .. && mkdir quazip-6.5.3-1.4intuisphere && mkdir quazip-6.5.3-1.4intuisphere\include && mkdir quazip-6.5.3-1.4intuisphere\include\QuaZip-Qt6-1.4\quazip && xcopy /E /I .\quazip_qt6\quazip quazip-6.5.3-1.4intuisphere\include\QuaZip-Qt6-1.4\quazip && mkdir quazip-6.5.3-1.4intuisphere\lib && xcopy /E /I .\quazip_qt6\build\quazip\Release quazip-6.5.3-1.4intuisphere\lib
