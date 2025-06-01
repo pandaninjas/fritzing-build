@@ -24,6 +24,8 @@ jobs:
       #   run: powershell New-Item -Force -ItemType Directory -Path $env:ProgramData\ssh; powershell Add-Content -Force -Path $env:ProgramData\ssh\administrators_authorized_keys -Value '''${{ secrets.SSH_PUBKEY }}''';icacls.exe ""$env:ProgramData\ssh\administrators_authorized_keys"" /inheritance:r /grant ""Administrators:F"" /grant ""SYSTEM:F""
       - name: Run sccache-cache
         uses: mozilla-actions/sccache-action@v0.0.9
+      - name: Tell sccache to use Actions cache
+        run: Add-Content -Path $env:GITHUB_ENV -Value "SCCACHE_GHA_ENABLED=true"
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
