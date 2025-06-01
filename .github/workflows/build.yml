@@ -65,3 +65,10 @@ jobs:
       - name: Do stuff
         run: cd fritzing-app && mkdir build && cd build && qmake -tp vc ..\phoenix.pro && msbuild Fritzing.vcxproj && tree
         shell: cmd
+      - name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: fritzing-build-debug-dir
+          path: |
+            .\fritzing-app\build\debug
+            .\fritzing-app\build\release
