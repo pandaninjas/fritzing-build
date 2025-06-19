@@ -34,7 +34,7 @@ jobs:
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v2
       - name: Install PolyClipper
-        run: curl https://sourceforge.net/projects/polyclipping/files/clipper_ver6.4.2.zip/download -L > clipper_ver6.4.2.zip && mkdir clipper_ver6.4.2 && mkdir Clipper1-6.4.2 && cd clipper_ver6.4.2 && tar xf ..\clipper_ver6.4.2.zip && cmake -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX=D:\a\fritzing-build\fritzing-build\Clipper1-6.4.2 cpp && msbuild INSTALL.vcxproj && tree /F
+        run: curl https://sourceforge.net/projects/polyclipping/files/clipper_ver6.4.2.zip/download -L > clipper_ver6.4.2.zip && mkdir clipper_ver6.4.2 && mkdir Clipper1-6.4.2 && cd clipper_ver6.4.2 && tar xf ..\clipper_ver6.4.2.zip && cmake -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}\Clipper1-6.4.2 cpp && msbuild INSTALL.vcxproj && tree /F
         shell: cmd
       - name: Install svgpp
         run: git clone https://github.com/svgpp/svgpp svgpp-1.3.1 && cd svgpp-1.3.1 && git checkout v1.3.1
@@ -48,13 +48,13 @@ jobs:
         run: curl -L https://sourceforge.net/projects/ngspice/files/ng-spice-rework/44/ngspice-44.tar.gz/download > ngspice-44.tar.gz && "C:\Program Files\Git\usr\bin\tar.exe" xzf ngspice-44.tar.gz
         shell: cmd
       - name: Build ngspice
-        run: export PATH=$PATH:/ucrt64/bin && cd ngspice-44 && ./autogen.sh && mkdir release && cd release  && ../configure --with-ngshared --enable-cider --enable-relpath --disable-debug prefix="D:/a/fritzing-build/fritzing-build/ngspice-42" CFLAGS="-m64 -O2" LDFLAGS="-m64 -s" && make clean -j$(nproc) && make -j$(nproc) && make install 
+        run: export PATH=$PATH:/ucrt64/bin && cd ngspice-44 && ./autogen.sh && mkdir release && cd release  && ../configure --with-ngshared --enable-cider --enable-relpath --disable-debug prefix="${{ github.workspace }}/ngspice-42" CFLAGS="-m64 -O2" LDFLAGS="-m64 -s" && make clean -j$(nproc) && make -j$(nproc) && make install 
         shell: msys2 {0}
       - name: Build INTUISPHERE QuaZip
         run: git clone https://github.com/INTUISPHERE/quazip_qt6 && cd quazip_qt6 && cmake --preset vcpkg && cmake -B build && cmake --build build --config Release && cd .. && mkdir quazip-6.5.3-1.4intuisphere && mkdir quazip-6.5.3-1.4intuisphere\include && mkdir quazip-6.5.3-1.4intuisphere\include\QuaZip-Qt6-1.4\quazip && xcopy /E /I .\quazip_qt6\quazip quazip-6.5.3-1.4intuisphere\include\QuaZip-Qt6-1.4\quazip && mkdir quazip-6.5.3-1.4intuisphere\lib && xcopy /E /I .\quazip_qt6\build\quazip\Release quazip-6.5.3-1.4intuisphere\lib
         shell: cmd
       - name: Do stuff
-        run: cd fritzing-app && mkdir build && cd build && qmake -tp vc ..\phoenix.pro "CONFIG+=release" && msbuild Fritzing.vcxproj && %QT_ROOT_DIR%\bin\windeployqt ..\debug64\Fritzing.exe && copy D:\a\fritzing-build\fritzing-build\quazip_qt6\build\quazip\Release\*.dll ..\debug64 && %QT_ROOT_DIR%\bin\windeployqt ..\debug64\quazip1-qt6.dll && copy D:\a\fritzing-build\fritzing-build\libgit2\build64\Debug\git2.dll ..\debug64
+        run: cd fritzing-app && mkdir build && cd build && qmake -tp vc ..\phoenix.pro "CONFIG+=release" && msbuild Fritzing.vcxproj && %QT_ROOT_DIR%\bin\windeployqt ..\debug64\Fritzing.exe && copy ${{ github.workspace }}\quazip_qt6\build\quazip\Release\*.dll ..\debug64 && %QT_ROOT_DIR%\bin\windeployqt ..\debug64\quazip1-qt6.dll && copy ${{ github.workspace }}\libgit2\build64\Debug\git2.dll ..\debug64
         shell: cmd
       - name: Upload result
         uses: actions/upload-artifact@v4
